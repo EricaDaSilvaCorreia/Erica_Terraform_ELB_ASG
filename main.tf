@@ -101,7 +101,7 @@ resource "aws_launch_configuration" "Erica_AutoScaling_conf" {
 }
 
 resource "aws_autoscaling_group" "Erica-AutoScalingGroup" {
-  load_balancers = ["${aws_lb.Erica_LB.id}"]
+  #load_balancers = ["${aws_lb.Erica_LB.id}"]
   name                 = "Erica-AutoScalingGroup"
   launch_configuration = "${aws_launch_configuration.Erica_AutoScaling_conf.name}"
   min_size             = 1
@@ -113,9 +113,9 @@ resource "aws_autoscaling_group" "Erica-AutoScalingGroup" {
   lifecycle {
     create_before_destroy = true
   }
-  tags {
+  tag {
     key = "Name"
     value = "${var.name}-AutoScalingGroup-${count.index + 1}"
-    propogate_at_launch = true
+    propagate_at_launch = true
   }
 }
